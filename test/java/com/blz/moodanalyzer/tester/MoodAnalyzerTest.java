@@ -5,6 +5,7 @@ package com.blz.moodanalyzer.tester;
 
 import org.junit.Test;
 
+import com.blz.moodanalyzer.controller.MoodAnalysisException;
 import com.blz.moodanalyzer.controller.MoodAnalyzerMain;
 
 import static org.junit.Assert.*;
@@ -13,21 +14,24 @@ public class MoodAnalyzerTest {
 	@Test
 	public void given_SadMood_Should_Return_SAD() {
 		MoodAnalyzerMain moodAnalyser = new MoodAnalyzerMain("I am in Sad Mood");
-		String mood = moodAnalyser.analyseMood();
-		assertSame("SAD", mood);
+		String mood;
+		try {
+			mood = moodAnalyser.analyseMood();
+			assertSame("SAD", mood);
+		} catch (MoodAnalysisException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Test
 	public void given_AnyMood_Should_Return_HAPPY() {
 		MoodAnalyzerMain moodAnalyser = new MoodAnalyzerMain("I am in Happy Mood");
-		String mood = moodAnalyser.analyseMood();
-		assertSame("HAPPY", mood);
-	}
-
-	@Test
-	public void given_NULLMood_Should_Return_HAPPY() {
-		MoodAnalyzerMain moodAnalyser = new MoodAnalyzerMain(null);
-		String mood = moodAnalyser.analyseMood();
-		assertSame("HAPPY", mood);
+		String mood;
+		try {
+			mood = moodAnalyser.analyseMood();
+			assertSame("HAPPY", mood);
+		} catch (MoodAnalysisException e) {
+			e.printStackTrace();
+		}
 	}
 }
